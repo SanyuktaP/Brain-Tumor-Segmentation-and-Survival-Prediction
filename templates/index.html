@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+	 <title>Brain Tumor Segmentation and Survival Prediction</title>
+	 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	 
+ </head>
+ <body>
+	 <div class="header">
+		 <h1>Brain Tumor Segmentation and Survival Prediction Results</h1>
+	 </div>
+ 
+	 <div class="form-container">
+        <form method="POST" action="/predict" enctype="multipart/form-data">
+            <label for="input-file">Select a Brain MRI scan:</label><br>
+            <input type="file" id="input-file" name="input-file"><br>
+            <label for="age">Age:</label><br>
+            <input type="text" id="age" name="age"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+	{% if input %}
+	<div class="image-container">
+		<div>
+			<h2>Input Image:</h2>
+			<img src="data:image/png;base64,{{ input }}" />
+		</div>
+		{% if output %}
+		<div>
+			<h2>Segmentation Output:</h2>
+			<img src="data:image/png;base64,{{ output }}" />
+		</div>
+		{% endif %}
+	</div>
+	{% endif %}
+
+	 {% if survival_days %}
+		 <div class="result-container">
+			 <h2>Survival Prediction </h2>
+			 <p>Survival days: {{ survival_days }}</p>
+		 </div>
+	 {% else %}
+		 <div class="result-container">
+			 <p>Survival Prediction available.</p>
+		 </div>
+	 {% endif %}
+ </body>
+ </html>
+ 
