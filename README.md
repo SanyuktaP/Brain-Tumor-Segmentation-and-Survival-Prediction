@@ -9,9 +9,30 @@ This project aims to segment brain tumor regions from MRI scans and predict surv
 
 ## Usage
 1. Clone the repository
-2. Install required packages
-3. Run `app.py` to start the Flask web application
-4. Open the web application in your browser by navigating to http://localhost:5000/
+2. Create a conda environment after opening the repository
+
+```bash
+conda create -n brats python=3.8 -y
+```
+
+```bash
+conda activate brats
+```
+
+3. Install required packages
+```bash
+pip install -r requirements.txt
+```
+
+4. Run `app.py` to start the Flask web application
+```bash
+python app.py
+```
+
+5. Open the web application in your browser by navigating to http://localhost:5000/
+
+## Architecture
+![full_architecture](https://user-images.githubusercontent.com/97040413/236619684-1278a17c-0b18-4707-877e-0bb834612730.png)
 
 ## Features
 - Accepts input of a single multichannel image of MRI and age
@@ -22,6 +43,13 @@ This project aims to segment brain tumor regions from MRI scans and predict surv
 
 ## Data
 The MRI images used in this project were obtained from the BraTS (Multimodal Brain Tumor Segmentation) challenge dataset.
+This containes 4 label volumes:
+1. T1
+2. T2
+3. T1ce
+4. Flair
+
+These are combined into single multichannel image in data for easy processing.
 
 ## Model Training
 - Preprocessing: The Training dataset is converted to NPY images for easy segmentation process.
