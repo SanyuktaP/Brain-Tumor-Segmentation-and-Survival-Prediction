@@ -2,13 +2,10 @@ from flask import Flask, request, render_template
 import numpy as np
 from tensorflow import keras
 import matplotlib.pyplot as plt
-import matplotlib
 import base64
 from io import BytesIO
 import pickle
 from logger import logging
-
-matplotlib.use('Agg')
 
 app = Flask(__name__)
 
@@ -18,7 +15,7 @@ model = keras.models.load_model("brats_3d.hdf5",compile=False)
 logging.info("model loaded")
 
 
-with open('Survival_Prediction/survival_pred_model.pkl', 'rb') as f:
+with open('Survival_Prediction/survival_model.pkl', 'rb') as f:
         survival_model = pickle.load(f)
 
 def predict(input_data):
@@ -47,14 +44,13 @@ def predict_view():
     total_pixels = np.prod(input_data.shape[:-1])  
 
     #input display
-
-    input_image = input_data[:, :, 55]
+    input_image = input_data[:,:,55]
     fig, ax = plt.subplots()
     ax.imshow(input_image)
     buffer = BytesIO()
     fig.savefig(buffer, format='png')
     input_base64 = base64.b64encode(buffer.getvalue()).decode()
-
+  
     segmentation = predict(input_data)
  
     age = request.form['age']
@@ -92,4 +88,4 @@ def predict_view():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
