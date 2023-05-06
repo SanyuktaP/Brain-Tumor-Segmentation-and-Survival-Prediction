@@ -3,6 +3,9 @@
 ## Introduction
 This project aims to segment brain tumor regions from MRI scans and predict survival using machine learning algorithms.
 
+## Dataset link
+https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation/code
+
 ## Prerequisites
 - Python 3.x
 - Required packages (can be installed via pip): numpy, pandas, matplotlib, scikit-learn, tensorflow, keras, nibabel, Flask
